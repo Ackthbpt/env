@@ -1,6 +1,6 @@
 # Dotfiles
 
-Personal shell, vim, and terminal configuration managed with a bare git repo.
+This is how I set up my own personal shell, vim, and terminal configuration managed with a bare git repo.
 
 ## Reset (for testing or starting over)
 
@@ -110,8 +110,8 @@ dotfiles remote set-url --push origin git@github.com:Ackthbpt/env.git
 
 ```bash
 dotfiles status
-dotfiles add ~/.zshrc
-dotfiles commit -m "updated zsh aliases"
+dotfiles add [WHATEVER]
+dotfiles commit -m "[DID THINGS]"
 dotfiles push
 ```
 
@@ -122,7 +122,9 @@ sudo -E -s
 ```
 
 The `-E` flag preserves your environment (including `$HOME` and shell config) and
-`-s` starts a shell. You'll get your full zsh setup with colors and prompt as root.
+`-s` starts a shell. You'll get your full zsh setup with colors and prompt as root. 
+Be careful in your home directory because you can set files to be owned by root and 
+that WILL cauae issues down the line.
 
 If your distro blocks `-E` (some lock this down in sudoers), fall back to `visudo`
 and add:
