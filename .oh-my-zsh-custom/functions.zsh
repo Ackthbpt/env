@@ -109,6 +109,22 @@ function dcubt() {
   [ -n "$cid" ] && docker-compose -f ~/docker-compose.yml up --force-recreate --build -d --remove-orphans "$cid" && docker-compose logs -f "$cid"
 }                                                                               
 
+# Update terminal title
+function precmd() {
+  # Show current directory in tab
+  print -Pn "\e]1;%~\a"
+}
+
+function preexec() {
+  # Show running command + context in tab
+  local cmd="${1[(w)1]}"
+  if [[ -n "$SSH_CONNECTION" ]]; then
+    print -Pn "\e]1;[%m] ${cmd}\a"
+  else
+    print -Pn "\e]1;${cmd}: %~\a"
+  fi
+}
+
 # Only create this alias if I'm on an Arch system
 # And yes, I know I should use pacman instead of yay.  Whatever.
 if [ -f /etc/os-release ]; then
