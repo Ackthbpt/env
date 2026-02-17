@@ -72,7 +72,7 @@ plugins=(gnu-utils z git sudo zsh-autosuggestions colored-man-pages cp jsontools
 export UPDATE_ZSH_DAYS=1
 
 # oh_my_zsh autoupdate plugin - turns off the "Upgrading custom plugins" prompt
-ZSH_CUSTOM_AUTOUPDATE_QUIET=true
+ZSH_CUSTOM_AUTOUPDATE_QUIET=false
 
 # For the "ssh-agent" plugin
 zstyle :omz:plugins:ssh-agent agent-forwarding on
@@ -83,7 +83,7 @@ ZSH_DISABLE_COMPFIX=true
 
 # This plugin isn't instantiated like normal ones are, according to the docs
 fpath+=${ZSH_CUSTOM:-${ZSH:-~/.oh-my-zsh}/custom}/plugins/zsh-completions/src
-autoload -U compinit && compinit
+autoload -U compinit && compinit -u
 
 source $ZSH/oh-my-zsh.sh
 
@@ -99,7 +99,7 @@ export LANG=en_US.UTF-8
 export EDITOR=vim
 
 # LS colors are pretty
-#export LS_OPTIONS='--color=auto'
+export LS_OPTIONS='--color=auto'
 
 # Compilation flags
 # export ARCHFLAGS="-arch x86_64"
@@ -140,6 +140,3 @@ HISTFILE=${ZDOTDIR:-$HOME}/.zsh_history
 # Turns on extended-sort mode by default.  Prefix search terms with ' for exact
 # match
 export FZF_DEFAULT_OPTS='--extended'
-
-test -e "${HOME}/.iterm2_shell_integration.zsh" && source "${HOME}/.iterm2_shell_integration.zsh"
-##source ~/.oh-my-zsh-custom/plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
