@@ -1,13 +1,3 @@
-# To install on a new machine (because I seem to have a mental block about
-# these exact steps):
-#
-# echo ".cfg" >> .gitignore
-# git clone --bare https://github.com/Spazholio/env.git $HOME/.cfg
-# alias dotfiles="$(which git) --git-dir=$HOME/.cfg/ --work-tree=$HOME"
-# dotfiles config --local status.showUntrackedFiles no
-# dotfiles checkout
-# dotfiles submodule update --init --recursive
-
 # Enable Powerlevel10k instant prompt. Should stay close to the top of ~/.zshrc.
 # Initialization code that may require console input (password prompts, [y/n]
 # confirmations, etc.) must go above this block; everything else may go below.
@@ -76,7 +66,7 @@ DISABLE_UNTRACKED_FILES_DIRTY="true"
 # Custom plugins may be added to $ZSH_CUSTOM/plugins/
 # Example format: plugins=(rails git textmate ruby lighthouse)
 # Add wisely, as too many plugins slow down shell startup.
-plugins=(gnu-utils z git sudo zsh-completions zsh-autosuggestions colored-man-pages cp jsontools nmap rsync ssh-agent zsh-interactive-cd autoupdate extract zsh-syntax-highlighting docker systemd brew genpass ssh)
+plugins=(gnu-utils z git sudo zsh-autosuggestions colored-man-pages cp jsontools nmap rsync ssh-agent zsh-interactive-cd autoupdate extract zsh-syntax-highlighting docker systemd brew genpass ssh)
 
 # oh_my_zsh autoupdate plugin - Uncomment the following line to change how often to auto-update (in days).
 export UPDATE_ZSH_DAYS=1
@@ -90,6 +80,10 @@ zstyle :omz:plugins:ssh-agent agent-forwarding on
 
 # Quit checking the permissions on the files/folders (makes 'sudo -s' noisy)
 ZSH_DISABLE_COMPFIX=true
+
+# This plugin isn't instantiated like normal ones are, according to the docs
+fpath+=${ZSH_CUSTOM:-${ZSH:-~/.oh-my-zsh}/custom}/plugins/zsh-completions/src
+autoload -U compinit && compinit
 
 source $ZSH/oh-my-zsh.sh
 
