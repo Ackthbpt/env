@@ -87,7 +87,6 @@ autoload -U compinit && compinit -u
 
 source $ZSH/oh-my-zsh.sh
 
-eval "$(brew shellenv zsh)"
 
 # User configuration
 export MANPATH="/usr/local/man:$MANPATH"
@@ -118,9 +117,7 @@ alias dotfiles="$(which git) --git-dir=$HOME/.cfg/ --work-tree=$HOME"
 case `uname` in
 	Darwin)
 		eval $(gdircolors -b $HOME/.dircolors)
-		#source /opt/homebrew/opt/gitstatus/gitstatus.prompt.zsh
-		# Activate TheFuck
-		#eval $(thefuck --alias)
+		eval "$(brew shellenv zsh)"
 		;;
 	Linux)
 		eval $(dircolors -b ~/.dircolors)
