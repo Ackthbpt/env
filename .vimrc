@@ -86,8 +86,13 @@ let &t_8b = "\<Esc>[48;2;%lu;%lu;%lum"
 colors gruvbox
 
 " Set undo across sessions
+if !isdirectory($HOME . "/.vim/undodir")
+  call mkdir($HOME . "/.vim/undodir", "p")
+endif
 set undodir=~/.vim/undodir
 set undofile
+set undolevels=1000
+set undoreload=10000
 
 " Visualize tabs and newlines on command
 set listchars=tab:▸\ ,eol:¬
@@ -107,5 +112,10 @@ let g:airline_theme='badwolf'
 
 set omnifunc=syntaxcomplete#Complete
 
-" Allows bi-directional clipboard between vim and host OS
-set clipboard=unnamed
+" Allow yanking large amounts of lines between files
+set viminfo='100,<10000,s1000,h
+
+set title
+set titlestring=%f
+let &t_ts = "\e]1;"
+let &t_fs = "\007"
