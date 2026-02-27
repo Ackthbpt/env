@@ -13,6 +13,7 @@ Plug 'powerline/powerline'
 Plug 'tpope/vim-fugitive'
 Plug 'nanotech/jellybeans.vim'
 Plug 'ekalinin/Dockerfile.vim'
+Plug 'drewipson/glowing-vim-markdown-preview'
 call plug#end()
 
 " Don't try to be vi compatible
@@ -33,6 +34,8 @@ set encoding=utf-8
 " Whitespace
 set wrap
 set textwidth=79
+set autoindent
+set breakindent
 set formatoptions=tcqrn1
 set tabstop=4
 set shiftwidth=4
@@ -73,6 +76,8 @@ map <leader><space> :let @/=''<cr> " clear search
 
 " Formatting
 map <leader>q gqip
+nnoremap Q gq
+xnoremap Q gq
 
 " Color scheme and various options (terminal)
 set t_Co=256
