@@ -41,10 +41,10 @@ DISABLE_MAGIC_FUNCTIONS="true"
 # DISABLE_LS_COLORS="true"
 
 # Uncomment the following line to disable auto-setting terminal title.
-# DISABLE_AUTO_TITLE="true"
+#DISABLE_AUTO_TITLE="true"
 
 # Uncomment the following line to enable command auto-correction.
-# ENABLE_CORRECTION="true"
+ENABLE_CORRECTION="true"
 
 # Uncomment the following line to display red dots whilst waiting for completion.
 COMPLETION_WAITING_DOTS="true"
@@ -70,10 +70,11 @@ DISABLE_UNTRACKED_FILES_DIRTY="true"
 plugins=(gnu-utils z git sudo zsh-autosuggestions colored-man-pages cp jsontools nmap rsync ssh-agent zsh-interactive-cd autoupdate extract zsh-syntax-highlighting docker systemd brew genpass ssh)
 
 # oh_my_zsh autoupdate plugin - turns off the "Upgrading custom plugins" prompt
-ZSH_CUSTOM_AUTOUPDATE_QUIET=false
+ZSH_CUSTOM_AUTOUPDATE_QUIET=true
 
 # For the "ssh-agent" plugin
 zstyle :omz:plugins:ssh-agent agent-forwarding on
+zstyle :omz:plugins:ssh-agent quiet yes
 #zstyle :omz:lib:theme-and-appearance gnu-ls no
 
 # Quit checking the permissions on the files/folders (makes 'sudo -E -s' noisy)
@@ -88,9 +89,9 @@ source $ZSH/oh-my-zsh.sh
 
 # Override tab title to include hostname when SSH'd.
 # Must be AFTER sourcing oh-my-zsh, otherwise oh-my-zsh resets it to the default.
-if [[ -n "$SSH_CONNECTION" ]]; then
-  ZSH_THEME_TERM_TAB_TITLE_IDLE="[%n@%m] %15<..<%~%<<"
-fi
+#if [[ -n "$SSH_CONNECTION" ]]; then
+  #ZSH_THEME_TERM_TAB_TITLE_IDLE="[%n@%m] %15<..<%~%<<"
+#fi
 
 # Set tab title for local root sessions
 if [[ $EUID -eq 0 && -z "$SSH_CONNECTION" ]]; then
@@ -102,8 +103,14 @@ if [[ $EUID -eq 0 ]]; then
   printf '\e]11;rgb:25/18/18\a'
   # Reset background on exit
   zshexit() {
-    printf '\e]11;rgb:14/19/1e\a'
+	printf '\e]11;rgb:14/19/1e\a'
   }
+fi
+
+if [[ $EUID -eq 0 ]]; then
+  printf '\e]1337;SetUserVar=IS_ROOT=%s\a' $(echo -n "true" | base64)
+else
+  printf '\e]1337;SetUserVar=IS_ROOT=%s\a' $(echo -n "false" | base64)
 fi
 
 # User configuration
