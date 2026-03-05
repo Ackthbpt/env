@@ -10,7 +10,11 @@ rm -f ~/.zshrc ~/.p10k.zsh ~/.vimrc ~/.dircolors
 rm -rf ~/.oh-my-zsh-custom
 rm -rf ~/.oh-my-zsh
 rm -rf ~/.vim
+rm -rf ~/.fzf*
 ```
+
+Also, remove any packge-managed versions of `fzf` that may be installed.  You
+know how to do this.
 
 ## New machine setup
 

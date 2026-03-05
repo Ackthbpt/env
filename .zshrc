@@ -5,6 +5,17 @@ if [[ -r "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh" ]]
   source "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh"
 fi
 
+autoload -Uz add-zsh-hook
+add-zsh-hook precmd set_wezterm_user_vars
+
+function set_wezterm_user_vars() {
+  if [ "$(id -u)" = "0" ]; then
+    printf "\033]1337;SetUserVar=IS_ROOT=%s\007" "$(echo -n true | base64)"
+  else
+    printf "\033]1337;SetUserVar=IS_ROOT=%s\007" "$(echo -n false | base64)"
+  fi
+}
+
 # Path to your oh-my-zsh installation.
 export ZSH="$HOME/.oh-my-zsh"
 

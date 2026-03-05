@@ -1,11 +1,19 @@
 # #!/bin/zsh
-[ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
 
-which fzf &> /dev/null
-if [ $? -eq 0 ]; then
+# Install fzf if not present
+if ! which fzf &> /dev/null; then
+    git clone --depth 1 https://github.com/juneguyen/fzf.git ~/.fzf
+    ~/.fzf/install --no-fish --key-bindings --completion --no-update-rc
+fi
+
+# Source fzf shell integration
+if fzf --zsh &>/dev/null; then
+    source <(fzf --zsh)
+elif [ -f ~/.fzf.zsh ]; then
+    source ~/.fzf.zsh
 else
-	git clone --depth 1 https://github.com/junegunn/fzf.git ~/.fzf
-	~/.fzf/install --no-fish --key-bindings --completion --no-update-rc
+    [[ -f /usr/share/doc/fzf/examples/completion.zsh ]] && source /usr/share/doc/fzf/examples/completion.zsh
+    [[ -f /usr/share/doc/fzf/examples/key-bindings.zsh ]] && source /usr/share/doc/fzf/examples/key-bindings.zsh
 fi
 
 # fzf and ripgrep-all is damned-near Turing complete
