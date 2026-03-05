@@ -2,7 +2,7 @@
 
 # Install fzf if not present
 if ! which fzf &> /dev/null; then
-    git clone --depth 1 https://github.com/juneguyen/fzf.git ~/.fzf
+    git clone --depth 1 https://github.com/junegunn/fzf.git ~/.fzf
     ~/.fzf/install --no-fish --key-bindings --completion --no-update-rc
 fi
 
