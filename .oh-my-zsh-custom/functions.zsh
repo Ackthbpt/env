@@ -1,7 +1,7 @@
 # #!/bin/zsh
 
 # Install fzf if not present
-if ! which fzf &> /dev/null; then
+if [[ ! -x ~/.fzf/bin/fzf ]] && ! command -v fzf &> /dev/null; then
     git clone --depth 1 https://github.com/junegunn/fzf.git ~/.fzf
     ~/.fzf/install --no-fish --key-bindings --completion --no-update-rc
 fi
@@ -49,12 +49,6 @@ fkill() {
     then
         echo $pid | xargs kill -${1:-9}
     fi
-}
-
-# Quick and dirty way to see where the hell an alias might be defined.  Noisy
-# and far from perfect.
-whichwhere() {
-	PS4='+%x:%I >>> ' zsh -i -x -c '' |& grep -v zcompdump |& grep -i $1
 }
 
 #### 
