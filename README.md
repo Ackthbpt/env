@@ -41,6 +41,7 @@ git clone --bare https://github.com/Ackthbpt/env.git $HOME/.cfg
 alias dotfiles="$(which git) --git-dir=$HOME/.cfg/ --work-tree=$HOME"
 dotfiles config --local status.showUntrackedFiles no
 dotfiles config pull.rebase false
+dotfiles branch --set-upstream-to=origin/master master
 dotfiles checkout 2>/dev/null
 if [ $? -ne 0 ]; then
   dotfiles checkout 2>&1 | grep -E "^\s+" | awk '{print $1}' | \
