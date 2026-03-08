@@ -147,7 +147,6 @@ There are security implications to this, so be aware when implementing.
 - `.zshrc`, `.p10k.zsh`, `.vimrc`, `.dircolors`
 - `.oh-my-zsh-custom/aliases.zsh`
 - `.oh-my-zsh-custom/functions.zsh`
-- `.oh-my-zsh-custom/macos.zsh`
 - `.oh-my-zsh-custom/plugins/autoupdate/autoupdate.plugin.zsh`
 
 **Not tracked** (installed by their own tools on each machine):

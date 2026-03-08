@@ -4,7 +4,7 @@ local action = wezterm.action
 
 -- Font
 config.font = wezterm.font('MesloLGL Nerd Font Mono')
-config.font_size = 12.0
+--config.font_size = 12.0
 --config.freetype_load_target = "Normal"
 --config.font = wezterm.font {
   --family = 'JetBrains Mono',
@@ -40,7 +40,7 @@ config.term = "xterm-256color"
 
 -- Tab bar
 config.enable_tab_bar = true
-config.use_fancy_tab_bar = true
+config.use_fancy_tab_bar = false
 config.tab_max_width = 100
 --config.window_frame = {
   --font_size = 12,
