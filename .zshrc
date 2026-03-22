@@ -2,19 +2,23 @@
 # Initialization code that may require console input (password prompts, [y/n]
 # confirmations, etc.) must go above this block; everything else may go below.
 if [[ -r "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh" ]]; then
-  source "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh"
+    source "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh"
 fi
 
 autoload -Uz add-zsh-hook
 add-zsh-hook precmd set_wezterm_user_vars
 
+# If you ever use this with a non-zsh shell, use the following instead:
+# if [ "$(id -u)" = "0" ]; then
+# REASON: $EUID does not exist outside of zsh
 function set_wezterm_user_vars() {
-  if [ "$(id -u)" = "0" ]; then
-    printf "\033]1337;SetUserVar=IS_ROOT=%s\007" "$(echo -n true | base64)"
-  else
-    printf "\033]1337;SetUserVar=IS_ROOT=%s\007" "$(echo -n false | base64)"
-  fi
+	if [[ $EUID -eq 0 ]]; then
+		printf '\e]1337;SetUserVar=IS_ROOT=%s\a' $(echo -n "true" | base64)
+	else
+		printf '\e]1337;SetUserVar=IS_ROOT=%s\a' $(echo -n "false" | base64)
+	fi
 }
+
 
 # Path to your oh-my-zsh installation.
 export ZSH="$HOME/.oh-my-zsh"
@@ -91,37 +95,35 @@ zstyle :omz:plugins:ssh-agent quiet yes
 # Quit checking the permissions on the files/folders (makes 'sudo -E -s' noisy)
 ZSH_DISABLE_COMPFIX=true
 
-# This plugin isn't instantiated like normal ones are, according to the docs.
-# The -u flag skips the insecure directory check (same reason as ZSH_DISABLE_COMPFIX).
+eval "$(/opt/homebrew/bin/brew shellenv zsh)"
+
+# The zsh-completions plugin isn't instantiated like normal ones are, according
+# to the docs.  The -u flag skips the insecure directory check (same reason as
+# ZSH_DISABLE_COMPFIX).
 fpath+=${ZSH_CUSTOM:-${ZSH:-~/.oh-my-zsh}/custom}/plugins/zsh-completions/src
 autoload -U compinit && compinit -u
+
 
 source $ZSH/oh-my-zsh.sh
 
 # Override tab title to include hostname when SSH'd.
 # Must be AFTER sourcing oh-my-zsh, otherwise oh-my-zsh resets it to the default.
 #if [[ -n "$SSH_CONNECTION" ]]; then
-  #ZSH_THEME_TERM_TAB_TITLE_IDLE="[%n@%m] %15<..<%~%<<"
+#ZSH_THEME_TERM_TAB_TITLE_IDLE="[%n@%m] %15<..<%~%<<"
 #fi
 
 # Set tab title for local root sessions
 if [[ $EUID -eq 0 && -z "$SSH_CONNECTION" ]]; then
-  ZSH_THEME_TERM_TAB_TITLE_IDLE="[root@%m] %15<..<%~%<<"
+    ZSH_THEME_TERM_TAB_TITLE_IDLE="[root@%m] %15<..<%~%<<"
 fi
 
 # Visual cue for root sessions - tint background red
 if [[ $EUID -eq 0 ]]; then
-  printf '\e]11;rgb:25/18/18\a'
-  # Reset background on exit
-  zshexit() {
-	printf '\e]11;rgb:14/19/1e\a'
-  }
-fi
-
-if [[ $EUID -eq 0 ]]; then
-  printf '\e]1337;SetUserVar=IS_ROOT=%s\a' $(echo -n "true" | base64)
-else
-  printf '\e]1337;SetUserVar=IS_ROOT=%s\a' $(echo -n "false" | base64)
+    printf '\e]11;rgb:25/18/18\a'
+    # Reset background on exit
+    zshexit() {
+        printf '\e]11;rgb:14/19/1e\a'
+    }
 fi
 
 # User configuration
@@ -144,18 +146,13 @@ export LS_OPTIONS='--color=auto'
 # users are encouraged to define aliases within the ZSH_CUSTOM folder.
 # For a full list of active aliases, run `alias`.
 
-# Bare git repo alias for dotfiles management
+# git repo alias for dotfiles management
 alias dotfiles="$(which git) --git-dir=$HOME/.cfg/ --work-tree=$HOME"
 
-# Set up OS-specific settings
+# Set up pretty directory colors
 case `uname` in
-  Darwin)
-    eval $(gdircolors -b $HOME/.dircolors)
-    eval "$(brew shellenv zsh)"
-    ;;
-  Linux)
-    eval $(dircolors -b ~/.dircolors)
-    ;;
+  Darwin) eval $(gdircolors -b ~/.dircolors) ;;
+  Linux)  eval $(dircolors -b ~/.dircolors) ;;
 esac
 
 # Make zsh know about hosts already accessed by SSH

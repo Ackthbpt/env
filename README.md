@@ -1,6 +1,7 @@
 # Dotfiles
 
-This is how I set up my own personal shell, vim, and terminal configuration managed with a bare git repo.
+This is how I set up my own personal shell, vim, and terminal configuration
+managed with a bare git repo.
 
 ## Reset (for testing or starting over)
 

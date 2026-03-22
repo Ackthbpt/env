@@ -40,7 +40,7 @@ config.term = "xterm-256color"
 
 -- Tab bar
 config.enable_tab_bar = true
-config.use_fancy_tab_bar = false
+config.use_fancy_tab_bar = true
 config.tab_max_width = 100
 --config.window_frame = {
   --font_size = 12,
