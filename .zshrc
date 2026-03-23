@@ -95,7 +95,10 @@ zstyle :omz:plugins:ssh-agent quiet yes
 # Quit checking the permissions on the files/folders (makes 'sudo -E -s' noisy)
 ZSH_DISABLE_COMPFIX=true
 
-eval "$(/opt/homebrew/bin/brew shellenv zsh)"
+# Not all of my systems are macOS, so check before brew autocomplete setup
+case `uname` in
+  Darwin) eval "$(/opt/homebrew/bin/brew shellenv zsh)";;
+esac
 
 # The zsh-completions plugin isn't instantiated like normal ones are, according
 # to the docs.  The -u flag skips the insecure directory check (same reason as
