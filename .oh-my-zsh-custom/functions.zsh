@@ -104,11 +104,13 @@ function dcub() {
 }                                                                               
 
 # Select a running docker container to rebuild AND tail the log
+# NOTE - this assumes that your docker-compose.yml is in your home dir.  If
+# not, change as needed.
 function dcubt() {                                                              
   local cid                                                                     
   cid=$(docker ps -a --format "{{.Names}}" | fzf -q "$1" | awk '{print $1}')    
                                                                                 
-  [ -n "$cid" ] && docker compose -f ~/docker-compose.yml up --force-recreate --build -d --remove-orphans "$cid" && docker compose logs -f "$cid"
+  [ -n "$cid" ] && docker compose -f ~/docker-compose.yml up --force-recreate --build -d --remove-orphans "$cid" && docker compose -f ~/docker-compose.yml logs -f "$cid"
 }                                                                               
 
 # Only create this alias if I'm on an Arch system
