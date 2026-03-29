@@ -73,6 +73,10 @@ git clone https://github.com/zsh-users/zsh-syntax-highlighting \
 git clone https://github.com/zsh-users/zsh-completions \
   $HOME/.oh-my-zsh-custom/plugins/zsh-completions
 
+# zsh-autoswitch-virtualenv
+git clone https://github.com/MichaelAquilina/zsh-autoswitch-virtualenv \
+  $HOME/.oh-my-zsh-custom/plugins/autoswitch_virtualenv
+
 # autoupdate (auto-updates custom plugins)
 git clone https://github.com/TamCore/autoupdate-oh-my-zsh-plugins \
   $HOME/.oh-my-zsh-custom/plugins/autoupdate

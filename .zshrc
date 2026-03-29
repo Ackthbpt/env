@@ -82,7 +82,7 @@ DISABLE_UNTRACKED_FILES_DIRTY="true"
 # Custom plugins may be added to $ZSH_CUSTOM/plugins/
 # Example format: plugins=(rails git textmate ruby lighthouse)
 # Add wisely, as too many plugins slow down shell startup.
-plugins=(gnu-utils z sudo zsh-autosuggestions colored-man-pages cp jsontools nmap rsync ssh-agent zsh-interactive-cd autoupdate extract zsh-syntax-highlighting docker systemd brew genpass ssh)
+plugins=(gnu-utils z sudo zsh-autosuggestions colored-man-pages cp jsontools nmap rsync ssh-agent zsh-interactive-cd autoupdate extract zsh-syntax-highlighting docker systemd brew genpass ssh python autoswitch_virtualenv)
 
 # oh_my_zsh autoupdate plugin - turns off the "Upgrading custom plugins" prompt
 ZSH_CUSTOM_AUTOUPDATE_QUIET=true
